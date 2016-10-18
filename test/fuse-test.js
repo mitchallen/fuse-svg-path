@@ -81,4 +81,31 @@ describe('fuse method', function() {
         result.should.eql(expected);
         done();
     });
+
+    it('should return fused path with middle ops', function(done) {
+        var obj = _factory.create({});
+        should.exist(obj);
+        let options = {
+            verbose: true,
+            path: [
+                { op: "M", x: 10, y: 20 },
+                { op: "L", x: 15, y:  5 },
+                { op: "L", x: 30, y: 40 },
+                { op: "M", x: 30, y: 40 },
+                { op: "L", x: 50, y: 55 },
+                { op: "L", x: 25, y: 35 }
+            ]
+        };
+        let expected = [
+            { op: "M", x: 10, y: 20 },
+            { op: "L", x: 15, y:  5 },
+            { op: "L", x: 30, y: 40 },
+            { op: "L", x: 50, y: 55 },
+            { op: "L", x: 25, y: 35 }
+        ];
+        var result = obj.fuse(options);
+        should.exist(result);
+        result.should.eql(expected);
+        done();
+    });
 });
