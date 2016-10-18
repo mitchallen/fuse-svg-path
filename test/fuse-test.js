@@ -263,4 +263,28 @@ describe('fuse method', function() {
         result.should.eql(expected);
         done();
     });
+
+    it('should return full non-fused path', function(done) {
+        var obj = _factory.create({});
+        should.exist(obj);
+        let options = {
+            verbose: false,
+            path: [
+                { op: "M", x: 10, y: 20 },
+                { op: "L", x: 30, y: 40 },
+                { op: "M", x: 40, y: 50 },
+                { op: "L", x: 60, y: 70 }
+            ]
+        };
+        let expected = [
+            { op: "M", x: 10, y: 20 },
+            { op: "L", x: 30, y: 40 },
+            { op: "M", x: 40, y: 50 },
+            { op: "L", x: 60, y: 70 }
+        ];
+        var result = obj.fuse(options);
+        should.exist(result);
+        result.should.eql(expected);
+        done();
+    });
 });
