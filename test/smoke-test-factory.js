@@ -59,4 +59,26 @@ describe('module factory smoke test', function() {
         obj.health().should.eql("OK");
         done();
     });
+
+    it('fuse method should not return fused path', function(done) {
+        var obj = _factory.create({});
+        should.exist(obj);
+        let options = {
+            path: [
+                { op: "M", x: 10, y: 20 },
+                { op: "L", x: 30, y: 40 },
+                { op: "M", x: 30, y: 40 },
+                { op: "L", x: 25, y: 35 }
+            ]
+        };
+        let expected = [
+            { op: "M", x: 10, y: 20 },
+            { op: "L", x: 30, y: 40 },
+            { op: "L", x: 25, y: 35 }
+        ];
+        var result = obj.fuse(options);
+        should.exist(result);
+        result.should.eql(expected);
+        done();
+    });
 });

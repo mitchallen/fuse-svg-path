@@ -1,8 +1,8 @@
 {
   "name": "@mitchallen/fuse-svg-path",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Fuse MoveTo LineTo paths, such as those used in SVG files",
+  "main": "index-factory.js",
   "scripts": {
     "//": "To use: npm start (useful if not a module)",
     "start": "node index.js",

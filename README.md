@@ -1,7 +1,7 @@
 
 @mitchallen/fuse-svg-path
 ==
-PUT DESCRIPTION HERE
+Fuse MoveTo LineTo paths, such as those used in SVG files
 --
 * * *
 ## Installation
