@@ -10,7 +10,7 @@ var request = require('supertest'),
     should = require('should'),
     modulePath = "../index-factory";
 
-describe('module factory smoke test', function() {
+describe('fuse method test', function() {
 
     var _factory = null;
 
@@ -33,30 +33,6 @@ describe('module factory smoke test', function() {
 
     afterEach(function(done) {
         // Call after eeach test
-        done();
-    });
-
-    it('module should exist', function(done) {
-        should.exist(_factory);
-        done();
-    })
-
-    it('create method with no spec should return null', function(done) {
-        var obj = _factory.create();
-        should.not.exist(obj);
-        done();
-    });
-
-    it('create method with spec should return object', function(done) {
-        var obj = _factory.create({});
-        should.exist(obj);
-        done();
-    });
-
-    it('health method should return ok', function(done) {
-        var obj = _factory.create({});
-        should.exist(obj);
-        obj.health().should.eql("OK");
         done();
     });
 
