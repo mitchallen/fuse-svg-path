@@ -78,6 +78,8 @@ module.exports.create = function (spec) {
 
             var fuseEnd = getFuseEnd();
 
+            var trashCount = 0;
+
             // TODO - use something better to determine loop end
             for( var temp = 0; temp < 4; temp++ ) {
 
@@ -93,18 +95,30 @@ module.exports.create = function (spec) {
                         // Already fused
                         continue;
                     }
+
+                    if( last.x == fuseEnd.x && last.y == fuseEnd.y ) {
+                        // Reverse in place
+                        pathList[fKey].reverse(); 
+                        // Reset values for reversed path
+                        path = pathList[fKey];
+                        first = path[0];
+                        first.op = "M";
+                        last = path[path.length-1];
+                        last.op = "L";
+                    }
+
                     if( first.x == fuseEnd.x && first.y == fuseEnd.y ) {
                         for( var sKey in path ) {
                             if( sKey < 1 ) {    // Ignore lint checker
                                 // Drop matching M
-                                // TODO - mark as trash
                                 pathList[fKey].push( { op: "X" } );
+                                trashCount += 1;    // jslint hates ++
                                 continue;
                             }
                             pathList[0].push(path[sKey]);
                         }
                         fuseEnd = getFuseEnd();
-                    }
+                    } 
                 } 
             }
 
