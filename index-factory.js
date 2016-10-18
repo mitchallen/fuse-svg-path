@@ -45,9 +45,21 @@ module.exports.create = function (spec) {
 
             for(var tKey in sourcePath) {
                 var pt = sourcePath[tKey];
+                if( pt.op === undefined || pt.x === undefined || pt.y === undefined ) {
+                    console.error("ERROR: path record invalid format");
+                    return null;
+                }
                 op = pt.op;
                 x = pt.x;
                 y = pt.k;
+                if( tKey < 1 && op !== "M") {
+                    console.error("ERROR: First path op must be equal to 'M' ");
+                    return null;
+                }
+                if( op !== "M" && op !== "L") {
+                    console.error("ERROR: currently only supports op set to 'M' or 'L' ");
+                    return null;
+                }
                 if( op == "M" ) {
                     // pathList.push([]);
                     pathList.push({ trash: false, path: [] });
@@ -84,6 +96,11 @@ module.exports.create = function (spec) {
             var safetyValve = 0;
 
             // Init fused path with first path
+
+            if(pathList[0].path[0].op !== "M") {
+                console.error("ERROR: First entry in path must have an op set to 'M' ");
+                return null;
+            }
 
             for(var zKey in pathList[0].path) {
                 var record = pathList[0].path[zKey];
@@ -145,9 +162,9 @@ module.exports.create = function (spec) {
             } while( trashCount > 0 && ++safetyValve < MAX_VALVE );
 
             if( safetyValve >= MAX_VALVE ) {
-                console.log(
-                    "SAFETY VALVED BLOWN:\n",
-                    "Trying setting / increasing fuse(option.maxValve)\n",
+                console.error(
+                    "SAFETY VALVE BLOWN:\n",
+                    "Try setting / increasing fuse(option.maxValve)\n",
                     "Current value: ", MAX_VALVE);
                 return null;
             }

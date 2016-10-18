@@ -1,6 +1,6 @@
 /**
     Module: @mitchallen/fuse-svg-path
-      Test: smoke-test-factory
+      Test: fuse-test
     Author: Mitch Allen
 */
 
