@@ -103,11 +103,12 @@ module.exports.create = function (spec) {
             }
 
             for(var zKey in pathList[0].path) {
-                var record = pathList[0].path[zKey];
-                fPath.push( record );
+                fPath.push( pathList[0].path[zKey] );
             }
 
             var fEnd = getFuseEnd();
+
+            var record = null;
 
             do {
 
@@ -119,7 +120,7 @@ module.exports.create = function (spec) {
                         // We will fuse on to path[0]
                         continue;
                     }
-                    var record = pathList[fKey];
+                    record = pathList[fKey];
                     if( record.trash === true ) {
                         // Trash: already fused
                         continue;
@@ -179,12 +180,12 @@ module.exports.create = function (spec) {
                 if( lKey < 1 ) {
                     continue;
                 }
-                record = pathList[lKey]
+                record = pathList[lKey];
                 if( record.trash ) {
                     continue;
                 }
                 for( var rpKey in record.path ) {
-                    fPath.push(path[rpKey]);
+                    fPath.push(record.path[rpKey]);
                 }
             }
 
