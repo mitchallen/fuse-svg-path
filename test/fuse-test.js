@@ -161,4 +161,30 @@ describe('fuse method', function() {
         result.should.eql(expected);
         done();
     });
+
+    it('should fuse multiple reversed paths', function(done) {
+        var obj = _factory.create({});
+        should.exist(obj);
+        let options = {
+            verbose: false,
+            path: [
+                { op: "M", x: 10, y: 20 },
+                { op: "L", x: 30, y: 40 },
+                { op: "M", x: 25, y: 35 },
+                { op: "L", x: 30, y: 40 },
+                { op: "M", x: 60, y: 65 },
+                { op: "L", x: 25, y: 35 }
+            ]
+        };
+        let expected = [
+            { op: "M", x: 10, y: 20 },
+            { op: "L", x: 30, y: 40 },
+            { op: "L", x: 25, y: 35 },
+            { op: "L", x: 60, y: 65 }
+        ];
+        var result = obj.fuse(options);
+        should.exist(result);
+        result.should.eql(expected);
+        done();
+    });
 });
