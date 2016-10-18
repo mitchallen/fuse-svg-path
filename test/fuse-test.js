@@ -187,4 +187,42 @@ describe('fuse method', function() {
         result.should.eql(expected);
         done();
     });
+
+    it('should fuse several paths', function(done) {
+        var obj = _factory.create({});
+        should.exist(obj);
+        let options = {
+            verbose: false,
+            path: [
+                { op: "M", x:  0, y:  5 },
+                { op: "L", x: 10, y: 15 },
+                { op: "M", x: 10, y: 15 },
+                { op: "L", x: 20, y: 25 },
+                { op: "M", x: 20, y: 25 },
+                { op: "L", x: 30, y: 35 },
+                { op: "M", x: 30, y: 35 },
+                { op: "L", x: 40, y: 45 },
+                { op: "M", x: 40, y: 45 },
+                { op: "L", x: 50, y: 55 },
+                { op: "M", x: 50, y: 55 },
+                { op: "L", x: 60, y: 65 },
+                { op: "M", x: 60, y: 65 },
+                { op: "L", x: 70, y: 75 }
+            ]
+        };
+        let expected = [
+            { op: "M", x:  0, y:  5 },
+            { op: "L", x: 10, y: 15 },
+            { op: "L", x: 20, y: 25 },
+            { op: "L", x: 30, y: 35 },
+            { op: "L", x: 40, y: 45 },
+            { op: "L", x: 50, y: 55 },
+            { op: "L", x: 60, y: 65 },
+            { op: "L", x: 70, y: 75 }
+        ];
+        var result = obj.fuse(options);
+        should.exist(result);
+        result.should.eql(expected);
+        done();
+    });
 });
