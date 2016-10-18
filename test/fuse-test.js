@@ -36,7 +36,7 @@ describe('fuse method test', function() {
         done();
     });
 
-    it('fuse method should not return fused path', function(done) {
+    it('fuse method should return fused path', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
         let options = {
