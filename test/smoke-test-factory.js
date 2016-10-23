@@ -84,7 +84,7 @@ describe('module factory smoke test', function() {
     });
 
 
-    it('fuse method should remove dupes', function(done) {
+    it('removeDupes method should remove dupes', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
         let options = {

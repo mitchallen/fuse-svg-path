@@ -62,8 +62,12 @@ module.exports.create = function (spec) {
                 }
                 if( allSame ) {
                     // Preserve first M / L - dump reset
-                    rPath.push(segment[0]);
-                    rPath.push(segment[1]);
+                    if(segment.length > 0 ) {
+                        rPath.push(segment[0]);
+                    }
+                    if(segment.length > 1 ) {
+                        rPath.push(segment[1]);
+                    }
                 } else {
                     var prev = null;
                     for( var j in segment ) { 
