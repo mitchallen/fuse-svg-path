@@ -208,6 +208,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.2 
+
+* rolled back dupe handling and test cases
+
 #### Version 0.1.1 
 
 * added duplicate point removal in fuse method
