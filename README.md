@@ -208,6 +208,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Version History
 
+#### Version 0.1.4 
+
+* fixed issue when removeDupes encounters path segment with only one op
+
 #### Version 0.1.3 
 
 * added experimental removeDupes method (same format as fuse)
