@@ -13,6 +13,8 @@ module.exports.create = function (spec) {
     }
     // private 
     let _package = "@mitchallen/fuse-svg-path";
+    let _DEFAULT_VERBOSE = false;
+    let _DEFAULT_MAX_VALVE = 1000;
     return {
         // public 
         package: function() {
@@ -33,8 +35,8 @@ module.exports.create = function (spec) {
                 return null;
             }
 
-            let verbose = options.verbose || false;
-            let MAX_VALVE = options.maxValve || 1000;
+            let verbose   = options.verbose  || _DEFAULT_VERBOSE;
+            let MAX_VALVE = options.maxValve || _DEFAULT_MAX_VALVE;
 
             var segmentList = this.segmentList( { 
                 path: options.path, 
@@ -94,8 +96,8 @@ module.exports.create = function (spec) {
                 return null;
             }
 
-            let verbose = options.verbose || false;
-            let MAX_VALVE = options.maxValve || 1000; 
+            let verbose   = options.verbose  || _DEFAULT_VERBOSE;
+            let MAX_VALVE = options.maxValve || _DEFAULT_MAX_VALVE; 
 
             var sourcePath = options.path,
                 pathList = [],
@@ -162,33 +164,6 @@ module.exports.create = function (spec) {
             if(pathList == null ) {
                 return null;
             }
-
-            /*
-            for(var tKey in sourcePath) {
-                var pt = sourcePath[tKey];
-                if( pt.op === undefined || pt.x === undefined || pt.y === undefined ) {
-                    console.error("ERROR: path record invalid format");
-                    return null;
-                }
-                op = pt.op;
-                x = pt.x;
-                y = pt.k;
-                if( tKey < 1 && op !== "M") {
-                    console.error("ERROR: First path op must be equal to 'M' ");
-                    return null;
-                }
-                if( op !== "M" && op !== "L") {
-                    console.error("ERROR: currently only supports op set to 'M' or 'L' ");
-                    return null;
-                }
-                if( op == "M" ) {
-                    // pathList.push([]);
-                    pathList.push({ trash: false, path: [] });
-                    pIndex = pathList.length - 1;
-                }
-                pathList[pIndex].path.push( pt );
-            }
-            */
 
             // Dump Path List
 
