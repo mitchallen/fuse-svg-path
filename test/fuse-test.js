@@ -288,7 +288,6 @@ describe('fuse method', function() {
         done();
     });
 
-    /*
     it('should remove dupes', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
@@ -313,14 +312,14 @@ describe('fuse method', function() {
             { op: "M", x: 50, y: 55 },
             { op: "L", x: 60, y: 65 }
         ];
-        var result = obj.fuse(options);
+        var fused = obj.fuse(options);
+        var result = obj.removeDupes( { path: fused } );
         should.exist(result);
         result.should.eql(expected);
         done();
     });
-    */
 
-    /*
+    
     it('fuse method should remove multiple dupes in a series', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
@@ -344,14 +343,14 @@ describe('fuse method', function() {
             { op: "L", x: 30, y: 40 },
             { op: "L", x: 25, y: 35 }
         ];
-        var result = obj.fuse(options);
+        var fused = obj.fuse(options);
+        var result = obj.removeDupes( { path: fused } );
         should.exist(result);
         result.should.eql(expected);
         done();
     });
-    */
+    
 
-    /*
     it('fuse method should only remove dupes in current path segment', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
@@ -372,15 +371,14 @@ describe('fuse method', function() {
                 { op: "L", x: 15, y: 15 },
                 { op: "L", x: 50, y: 60 },
         ];
-        var result = obj.fuse(options);
+        var fused = obj.fuse(options);
+        var result = obj.removeDupes( { path: fused } );
         should.exist(result);
         result.should.eql(expected);
         done();
     });
-    */
 
-    /*
-    it('fuse method should not remove dupe if last point was MoveTo', function(done) {
+    it('fuse method should not remove dupe if segment length would be one', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
         let options = {
@@ -399,10 +397,11 @@ describe('fuse method', function() {
                 { op: "M", x: 30, y: 40 },
                 { op: "L", x: 30, y: 40 },
         ];
-        var result = obj.fuse(options);
+        var fused = obj.fuse(options);
+        var result = obj.removeDupes( { path: fused } );
         should.exist(result);
         result.should.eql(expected);
         done();
     });
-    */
+
 });

@@ -83,7 +83,7 @@ describe('module factory smoke test', function() {
         done();
     });
 
-    /*
+
     it('fuse method should remove dupes', function(done) {
         var obj = _factory.create({});
         should.exist(obj);
@@ -103,11 +103,11 @@ describe('module factory smoke test', function() {
             { op: "L", x: 30, y: 40 },
             { op: "L", x: 25, y: 35 }
         ];
-        var result = obj.fuse(options);
+        var fused = obj.fuse(options);
+        var result = obj.removeDupes( { path: fused } );
         should.exist(result);
         result.should.eql(expected);
         done();
     });
-    */
 
 });

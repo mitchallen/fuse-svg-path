@@ -1,4 +1,4 @@
-/**
+ /**
     Module: @mitchallen/fuse-svg-path
     Author: Mitch Allen
 */
@@ -21,7 +21,68 @@ module.exports.create = function (spec) {
         health: function() {
             return "OK";
         },
-        fuse: function(options) {
+        removeDupes: function(options) {
+
+            if(!options) {
+                console.error("ERROR: removeDupes() called with no options");
+                return null;
+            }
+
+            if(!options.path) {
+                console.error("ERROR: removeDupes() called with no path");
+                return null;
+            }
+
+            let verbose = options.verbose || false;
+            let MAX_VALVE = options.maxValve || 1000;
+
+            var segmentList = this.segmentList( { 
+                path: options.path, 
+                verbose: verbose, 
+                maxValve: MAX_VALVE } );
+
+            if(segmentList == null ) {
+                return null;
+            }
+
+            var rPath = [];
+            var prev = null;
+
+            for( var sg in segmentList ) {
+                var segment = segmentList[sg].path;
+                // Test to see if all points have same x y
+                var firstRec = segment[0];
+                var allSame = true;
+                for( var i in segment ) {
+                    var point = segment[i];
+                    if( point.x != firstRec.x || point.y != firstRec.y ) {
+                        allSame = false;
+                    }
+                }
+                if( allSame ) {
+                    // Preserve first M / L - dump reset
+                    rPath.push(segment[0]);
+                    rPath.push(segment[1]);
+                } else {
+                    var prev = null;
+                    for( var j in segment ) { 
+                        var ps = segment[j];
+                        if(prev) {
+                            if( !(prev.x == ps.x && prev.y == ps.y) ) {
+                                rPath.push(ps);
+                            }
+                        } else {
+                            rPath.push(ps);
+                        }
+
+                        prev = ps;
+                    }
+                }
+            }
+
+            return rPath;
+        },
+        segmentList: function(options) {
 
             if(!options) {
                 console.error("ERROR: fuse() called with no options");
@@ -67,6 +128,67 @@ module.exports.create = function (spec) {
                 }
                 pathList[pIndex].path.push( pt );
             }
+
+            return pathList;
+
+        },
+        fuse: function(options) {
+
+            if(!options) {
+                console.error("ERROR: fuse() called with no options");
+                return null;
+            }
+
+            if(!options.path) {
+                console.error("ERROR: fuse() called with no path");
+                return null;
+            }
+
+            let verbose = options.verbose || false;
+            let MAX_VALVE = options.maxValve || 1000; 
+
+            var sourcePath = options.path,
+                pathList = [],
+                pIndex = pathList.length,
+                op = null,
+                x = 0,
+                y = 0;
+
+            pathList = this.segmentList( { 
+                path: sourcePath, 
+                verbose: verbose, 
+                maxValve: MAX_VALVE } );
+
+            if(pathList == null ) {
+                return null;
+            }
+
+            /*
+            for(var tKey in sourcePath) {
+                var pt = sourcePath[tKey];
+                if( pt.op === undefined || pt.x === undefined || pt.y === undefined ) {
+                    console.error("ERROR: path record invalid format");
+                    return null;
+                }
+                op = pt.op;
+                x = pt.x;
+                y = pt.k;
+                if( tKey < 1 && op !== "M") {
+                    console.error("ERROR: First path op must be equal to 'M' ");
+                    return null;
+                }
+                if( op !== "M" && op !== "L") {
+                    console.error("ERROR: currently only supports op set to 'M' or 'L' ");
+                    return null;
+                }
+                if( op == "M" ) {
+                    // pathList.push([]);
+                    pathList.push({ trash: false, path: [] });
+                    pIndex = pathList.length - 1;
+                }
+                pathList[pIndex].path.push( pt );
+            }
+            */
 
             // Dump Path List
 
@@ -185,7 +307,8 @@ module.exports.create = function (spec) {
                     continue;
                 }
                 for( var rpKey in record.path ) {
-                    fPath.push(record.path[rpKey]);
+                    var point = record.path[rpKey];
+                    fPath.push(point);
                 }
             }
 
