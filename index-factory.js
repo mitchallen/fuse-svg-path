@@ -41,7 +41,9 @@ module.exports.create = function (spec) {
                 pIndex = pathList.length,
                 op = null,
                 x = 0,
-                y = 0;
+                y = 0,
+                lastPoint = { op: "L", x: -1, y: -1 } ;
+
 
             for(var tKey in sourcePath) {
                 var pt = sourcePath[tKey];
@@ -60,11 +62,24 @@ module.exports.create = function (spec) {
                     console.error("ERROR: currently only supports op set to 'M' or 'L' ");
                     return null;
                 }
+
                 if( op == "M" ) {
+
                     // pathList.push([]);
                     pathList.push({ trash: false, path: [] });
                     pIndex = pathList.length - 1;
+
+                } else if( op == "L" ) {
+                    if( lastPoint.x == x && lastPoint.y == y ) {
+                        // Leave out dupe.
+                        continue;
+                    }
                 }
+
+                lastPoint.op = op;
+                lastPoint.x = x;
+                lastPoint.y = y;
+
                 pathList[pIndex].path.push( pt );
             }
 
