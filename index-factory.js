@@ -43,12 +43,11 @@ module.exports.create = function (spec) {
                 verbose: verbose, 
                 maxValve: MAX_VALVE } );
 
-            if(segmentList == null ) {
+            if(segmentList === null ) {
                 return null;
             }
 
             var rPath = [];
-            var prev = null;
 
             for( var sg in segmentList ) {
                 var segment = segmentList[sg].path;
@@ -161,7 +160,7 @@ module.exports.create = function (spec) {
                 verbose: verbose, 
                 maxValve: MAX_VALVE } );
 
-            if(pathList == null ) {
+            if(pathList === null ) {
                 return null;
             }
 
