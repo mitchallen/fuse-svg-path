@@ -6,11 +6,29 @@ Fuse MoveTo LineTo paths, such as those used in SVG files
 * * *
 ## Installation
 
-You must use __npm__ __2.7.0__ or higher because of the scoped package name.
+As of __0.2.0__ this package is published to __GitHub Packages__, not the public npm
+registry. Versions __0.1.4 and earlier__ remain on npmjs.org and are no longer updated
+there.
+
+Requires __Node.js 18__ or higher.
+
+Add an `.npmrc` next to your `package.json`:
+
+    @mitchallen:registry=https://npm.pkg.github.com
+
+GitHub Packages requires authentication even for public packages, so you also need a
+personal access token with the `read:packages` scope. Keep it in an environment
+variable rather than committing it:
+
+    //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+Then:
 
     $ npm init
-    $ npm install @mitchallen/fuse-svg-path --save
-  
+    $ npm install @mitchallen/fuse-svg-path
+
+This package has __no dependencies__.
+
 * * *
 
 ## Introduction
@@ -194,7 +212,6 @@ To test, go to the root folder and type (sans __$__):
  
 ## Repo(s)
 
-* [bitbucket.org/mitchallen/fuse-svg-path.git](https://bitbucket.org/mitchallen/fuse-svg-path.git)
 * [github.com/mitchallen/fuse-svg-path.git](https://github.com/mitchallen/fuse-svg-path.git)
 
 * * *
@@ -207,6 +224,18 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * * *
 
 ## Version History
+
+#### Version 0.2.0
+
+* now published to __GitHub Packages__ instead of npmjs.org (see Installation)
+* removed the unused __@mitchallen/factory-base__ dependency -- this package now has none
+* removed the unused __supertest__ devDependency
+* removed the Grunt toolchain
+* mocha is now a devDependency -- `npm test` previously fell back to a global install
+* upgraded __should__ to 13.x
+* replaced the __.npmignore__ blocklist with a __files__ allowlist
+* added an __engines__ field (Node.js 18+)
+* deduplicated the __repository__ key in package.json
 
 #### Version 0.1.4 
 
