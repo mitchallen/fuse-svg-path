@@ -1,3 +1,9 @@
+> **This repository is archived, and `@mitchallen/fuse-svg-path` is frozen at 0.2.2.**
+> That version stays installable from GitHub Packages for existing users, but
+> there will be no further releases. The code continues as
+> `@mitchallen/fuse-svg-path-v2`, an internal package of the
+> [drawing-kit](https://github.com/mitchallen/drawing-kit) monorepo
+> ([`packages/fuse-svg-path`](https://github.com/mitchallen/drawing-kit/tree/main/packages/fuse-svg-path)).
 
 @mitchallen/fuse-svg-path
 ==
