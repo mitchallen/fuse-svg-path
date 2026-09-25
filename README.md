@@ -3,6 +3,22 @@
 ==
 Fuse MoveTo LineTo paths, such as those used in SVG files
 --
+
+<p align="left">
+  <a href="https://github.com/mitchallen/fuse-svg-path/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/mitchallen/fuse-svg-path/ci.yml?branch=main" alt="CI">
+  </a>
+  <a href="https://github.com/mitchallen/fuse-svg-path/actions/workflows/ci.yml?query=branch%3Amain">
+    <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="Coverage: 100%">
+  </a>
+  <a href="https://github.com/mitchallen/fuse-svg-path/pkgs/npm/fuse-svg-path">
+    <img src="https://img.shields.io/github/package-json/v/mitchallen/fuse-svg-path?label=GitHub%20Packages" alt="Version">
+  </a>
+  <a href="https://github.com/mitchallen/fuse-svg-path/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+  </a>
+</p>
+
 * * *
 ## Installation
 

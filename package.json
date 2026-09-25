@@ -10,7 +10,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "mocha --recursive --timeout 20000"
+    "test": "mocha --recursive --timeout 20000",
+    "coverage": "c8 --check-coverage --100 --reporter=text mocha --recursive --timeout 20000"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -26,6 +27,7 @@
   "author": "Mitch Allen <npm@mitchallen.com> (http://mitchallen.com)",
   "license": "ISC",
   "devDependencies": {
+    "c8": "^12.0.0",
     "mocha": "^11.7.6",
     "should": "^13.2.3"
   },
