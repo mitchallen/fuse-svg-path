@@ -195,12 +195,9 @@ module.exports.create = function (spec) {
             var trashCount = 0;
             var safetyValve = 0;
 
-            // Init fused path with first path
-
-            if(pathList[0].path[0].op !== "M") {
-                console.error("ERROR: First entry in path must have an op set to 'M' ");
-                return null;
-            }
+            // Init fused path with first path. segmentList() has already
+            // rejected paths whose first record is not an 'M', so every
+            // segment here starts with a move.
 
             for(var zKey in pathList[0].path) {
                 fPath.push( pathList[0].path[zKey] );
